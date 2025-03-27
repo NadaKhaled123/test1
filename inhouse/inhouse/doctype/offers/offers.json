@@ -1,0 +1,150 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "field:title",
+ "creation": "2025-02-19 01:37:50.039840",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "title",
+  "buy_more_bay_less_tab",
+  "buy_more_bay_less_offer",
+  "section_break_bkpt",
+  "buy_more_bay_less_items",
+  "column_break_qlhb",
+  "buy_more_bay_less_item_group",
+  "section_break_fpig",
+  "buy_more_bay_less_discounts",
+  "tab_2_tab",
+  "exchange_offer",
+  "exchange_item",
+  "section_break_hadp",
+  "exchange_items",
+  "column_break_etpq",
+  "exchange_group",
+  "section_break_rhng",
+  "discount"
+ ],
+ "fields": [
+  {
+   "fieldname": "buy_more_bay_less_tab",
+   "fieldtype": "Tab Break",
+   "label": "Buy More Bay Less"
+  },
+  {
+   "default": "0",
+   "fieldname": "buy_more_bay_less_offer",
+   "fieldtype": "Check",
+   "label": "Apply Offer"
+  },
+  {
+   "fieldname": "tab_2_tab",
+   "fieldtype": "Tab Break",
+   "label": "Exchange"
+  },
+  {
+   "fieldname": "section_break_bkpt",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "buy_more_bay_less_items",
+   "fieldtype": "Table",
+   "label": "Buy More Bay Less Items",
+   "options": "Buy More Bay Less Item"
+  },
+  {
+   "fieldname": "section_break_fpig",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "buy_more_bay_less_discounts",
+   "fieldtype": "Table",
+   "label": "Buy More Bay Less DIscounts",
+   "options": "Buy More Bay Less DIscount"
+  },
+  {
+   "default": "0",
+   "fieldname": "exchange_offer",
+   "fieldtype": "Check",
+   "label": "Apply Offer"
+  },
+  {
+   "fieldname": "title",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Title",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "column_break_qlhb",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "buy_more_bay_less_item_group",
+   "fieldtype": "Table",
+   "label": "Buy More Bay Less Item Group",
+   "options": "Buy More Bay Less Item Group"
+  },
+  {
+   "fieldname": "section_break_hadp",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_etpq",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "exchange_group",
+   "fieldtype": "Table",
+   "label": "Exchange Group",
+   "options": "Exchange Group"
+  },
+  {
+   "fieldname": "section_break_rhng",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "discount",
+   "fieldtype": "Percent",
+   "label": "Discount"
+  },
+  {
+   "fieldname": "exchange_items",
+   "fieldtype": "Table",
+   "label": "Exchange Items",
+   "options": "Exchange Item"
+  },
+  {
+   "fieldname": "exchange_item",
+   "fieldtype": "Link",
+   "label": "Exchange Item",
+   "options": "Item"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2025-02-20 04:46:57.112851",
+ "modified_by": "Administrator",
+ "module": "inhouse",
+ "name": "Offers",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

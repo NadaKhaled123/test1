@@ -1,0 +1,86 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-01-01 12:00:22.797313",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "item",
+  "variant_attribute",
+  "attribute_value",
+  "attribute_price",
+  "qty",
+  "amount",
+  "template_item",
+  "template_item_price"
+ ],
+ "fields": [
+  {
+   "fieldname": "variant_attribute",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Variant Attribute",
+   "read_only": 1
+  },
+  {
+   "fieldname": "attribute_value",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Attribute Value",
+   "read_only": 1
+  },
+  {
+   "fieldname": "attribute_price",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Attribute Price",
+   "read_only": 1
+  },
+  {
+   "default": "1",
+   "fieldname": "qty",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Qty"
+  },
+  {
+   "fieldname": "amount",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Attribute Amount",
+   "read_only": 1
+  },
+  {
+   "fieldname": "item",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Item"
+  },
+  {
+   "fieldname": "template_item",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Template Item",
+   "options": "Item"
+  },
+  {
+   "fieldname": "template_item_price",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Template Item Price"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2025-01-08 16:17:47.624769",
+ "modified_by": "Administrator",
+ "module": "inhouse",
+ "name": "Fetched Variant Attribute",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
