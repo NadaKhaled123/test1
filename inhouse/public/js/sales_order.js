@@ -194,21 +194,21 @@ function open_variant_selector(frm) {
     }
 
     frappe.call({
-        method: "inhouse.inhouse.controllers.sales_order.get_template_item_attributes",
+        method: "inhouse.inhouse.controllers.sales_order.get_template_item_attributes_as_array_of_objects",
         args: {
-            template_item: frm.doc.custom_template_item
+            template_item: frm.doc.custom_template_item,
         },
-        callback: function(response) {
+        callback: function (response) {
             if (response.message) {
                 show_attribute_popup(frm, response.message);
             }
-        }
+        },
     });
 }
 
 function show_attribute_popup(frm, attributes) {
     let fields = [];
-
+    console.log(attributes)
     attributes.forEach(attr => {
         let options = attr.values.map(value => ({
             label: value,
@@ -346,7 +346,7 @@ function find_variant_item(frm, selected_values) {
                         }
                     });
 
-                    frm.refresh_field("items");
+                    // frm.refresh_field("items");
                 }
             } else {
                 frappe.show_alert({
