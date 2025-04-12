@@ -208,7 +208,6 @@ function open_variant_selector(frm) {
 
 function show_attribute_popup(frm, attributes) {
     let fields = [];
-    console.log(attributes)
     attributes.forEach(attr => {
         let options = attr.values.map(value => ({
             label: value,
