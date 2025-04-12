@@ -1,3 +1,4 @@
+from erpnext.controllers.item_variant import get_variant
 import frappe
 from frappe.model.document import Document
 from frappe import _
@@ -192,6 +193,24 @@ def get_template_item_attributes(template_item):
     return attributes
 
 
+@frappe.whitelist()
+def get_template_item_attributes_as_array_of_objects(template_item):
+    """
+    Fetch template item attributes as an array of objects.
+
+    Args:
+        item (str): The template item code.
+
+    Returns:
+        list: A list of dictionaries representing the attributes.
+    """
+    template_doc = frappe.get_doc("Item", template_item)
+    organized_attributes = organize_template_attributes(template_doc)
+    return [
+        {"attribute": key, "values": list(value.keys())}
+        for key, value in organized_attributes.items()
+    ]
+
 
 @frappe.whitelist()
 def find_variant(template_item, selected_attributes):
@@ -203,50 +222,41 @@ def find_variant(template_item, selected_attributes):
 
     if not isinstance(selected_attributes, dict):
         frappe.throw("selected_attributes must be a dictionary")
+    return get_variant(
+        template=template_item,
+        args=selected_attributes,
+    )
+    
 
-    variants = frappe.get_all("Item", filters={"variant_of": template_item}, pluck="name")
+def organize_template_attributes(item):
+    """
+    Organize custom_template_item_attributes_ into a dictionary of dictionaries.
 
-    if not variants:
-        return None 
+    Args:
+        item (str): The item code of the template item.
 
-    sorted_selected_attributes = dict(sorted(selected_attributes.items()))
-    sorted_selected_attributes = {
-        k.strip(): v.strip() if isinstance(v, str) else v 
-        for k, v in sorted_selected_attributes.items()
-    }
+    Returns:
+        dict: A dictionary where the key is the attribute name, and the value is another dictionary
+        with attribute value as the key and price as the value.
+    """
+    # Fetch the Item document
+    item_doc = frappe.get_doc("Item", item) if isinstance(item, str) else item
 
-    mapped_selected_attributes = {}
-    for attribute, abbr in sorted_selected_attributes.items():
-        attribute_value = frappe.db.get_value(
-            "Item Attribute Value",
-            {"abbr": abbr, "parent": attribute},
-            "attribute_value"
-        )
-        if not attribute_value:
-            frappe.throw(f"No matching attribute value found for abbreviation: {abbr} and attribute: {attribute}")
-        mapped_selected_attributes[attribute] = attribute_value
+    # Access the custom child table
+    template_item_attributes = item_doc.get(
+        "custom_template_item_attributes_")  # Replace with actual fieldname
 
-    for variant in variants:
-        attributes = frappe.get_all("Item Variant Attribute", 
-                                    filters={"parent": variant}, 
-                                    fields=["attribute", "attribute_value"])
-        
-        variant_attributes = {
-            attr["attribute"]: attr["attribute_value"]
-            for attr in attributes
-        }
+    # Organize into a dictionary of dictionaries
+    attributes_dict = {}
+    for row in template_item_attributes:
 
-        variant_attributes = {
-            k.strip(): v.strip() if isinstance(v, str) else v 
-            for k, v in variant_attributes.items()
-        }
+        if row.attribute_name not in attributes_dict:
+            attributes_dict[row.attribute_name] = {}
+        if attributes_dict[row.attribute_name].get(row.attribute_value):
+            continue
+        attributes_dict[row.attribute_name][row.attribute_value] = row
 
-        if mapped_selected_attributes == variant_attributes:
-            # frappe.throw("Match found: " + str(variant))
-            return variant  
-
-    return None
-
+    return attributes_dict
 
 
 
